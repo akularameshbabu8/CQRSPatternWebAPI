@@ -2,18 +2,18 @@
 using Infrastructure;
 using MediatR;
 
-namespace Application.Queries.Persons.GetById
+namespace Application.Queries.FilmyCharacters.GetById
 {
-    public class GetPersonByIdQueryHandler : IRequestHandler<GetPersonByIdQuery, Person?>
+    public class GetCharacterByIdQueryHandler : IRequestHandler<GetCharacterByIdQuery, Person?>
     {
         private readonly IRepository<Person> _repository;
 
-        public GetPersonByIdQueryHandler()
+        public GetCharacterByIdQueryHandler()
         {
             _repository = new Repository<Person>();
         }
 
-        public async Task<Person?> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Person?> Handle(GetCharacterByIdQuery request, CancellationToken cancellationToken)
         {
             if (request.CharacterId == 0)
             {

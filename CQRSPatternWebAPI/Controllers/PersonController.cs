@@ -1,4 +1,4 @@
-﻿using Application.Queries.Persons.GetById;
+﻿using Application.Queries.FilmyCharacters.GetById;
 using Domain.Models;
 using Infrastructure;
 using MediatR;
@@ -15,17 +15,25 @@ namespace API.Controllers
         {
             _mediator = mediator;
         }
-        private readonly IRepository<Person> _peopleRepo = new Repository<Person>();
-        
-
-
-
         [HttpGet]
         [Route("/swapi/films/{filmId}/characters/{characterId}")]
-        public async Task<IActionResult> GetPersonById(int characterId)
+        public async Task<IActionResult> GetCharacterInFilm(int filmId, int characterId)
         {
+            var characterQuery = new GetCharacterByIdQuery(characterId);
+            var characterResult = await _mediator.Send(characterQuery);
 
-            return Ok(await _mediator.Send(new GetPersonByIdQuery(characterId)));
+            if (characterResult != null)
+            {
+                var filmQuery = new GetFilmByIdQuery(filmId);
+                var filmResult = await _mediator.Send(filmQuery);
+
+                if (filmResult != null && filmResult.Characters.Count > 0)
+                {
+                    return Ok(characterResult);
+                }
+            }
+
+            return NotFound();
         }
 
 
