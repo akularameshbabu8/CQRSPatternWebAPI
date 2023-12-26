@@ -1,12 +1,6 @@
-﻿using Application.Queries.FilmyCharacters.GetById;
-using Domain.Models;
+﻿using Domain.Models;
 using Infrastructure;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CQRSPatternWebAPI.Test.FilmCharactersTests.RepositoryTests
 {

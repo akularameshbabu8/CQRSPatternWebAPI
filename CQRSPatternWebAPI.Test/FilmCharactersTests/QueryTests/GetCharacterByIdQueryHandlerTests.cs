@@ -1,5 +1,6 @@
 ﻿using API.Controllers;
-using Application.Queries.FilmyCharacters.GetById;
+using Application.FilmCharacters.Queries;
+using Application.FilmCharacters.QueryHandlers;
 using Domain.Models;
 using Infrastructure;
 using MediatR;

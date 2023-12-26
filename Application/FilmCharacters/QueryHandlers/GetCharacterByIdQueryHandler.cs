@@ -1,8 +1,9 @@
-﻿using Domain.Models;
+﻿using Application.FilmCharacters.Queries;
+using Domain.Models;
 using Infrastructure;
 using MediatR;
 
-namespace Application.Queries.FilmyCharacters.GetById
+namespace Application.FilmCharacters.QueryHandlers
 {
     public class GetCharacterByIdQueryHandler : IRequestHandler<GetCharacterByIdQuery, Person?>
     {
@@ -20,7 +21,7 @@ namespace Application.Queries.FilmyCharacters.GetById
                 return null;
             }
 
-            return  _repository.GetById(request.CharacterId);
+            return _repository.GetById(request.CharacterId);
         }
     }
 }

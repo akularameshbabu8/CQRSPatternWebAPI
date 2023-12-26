@@ -1,7 +1,5 @@
-﻿using Application.Queries.FilmyCharacters.GetById;
-using Domain.Models;
+﻿using Application.FilmCharacters.Queries;
 using Domain.Models.Domain.Models;
-using Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

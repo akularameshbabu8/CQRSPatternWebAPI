@@ -1,5 +1,5 @@
 ﻿using API.Controllers;
-using Application.Queries.FilmyCharacters.GetById;
+using Application.FilmCharacters.Queries;
 using Domain.Models;
 using Domain.Models.Domain.Models;
 using MediatR;
@@ -8,8 +8,8 @@ using Moq;
 
 namespace CQRSPatternWebAPI.Test.FilmCharactersTests.APIControllerTests
 {
-   
-    
+
+
     [TestFixture]
     public class CharactersControllerTest
     {

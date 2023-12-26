@@ -1,8 +1,9 @@
-﻿using Domain.Models;
+﻿using Application.FilmCharacters.Queries;
+using Domain.Models;
 using Infrastructure;
 using MediatR;
 
-namespace Application.Queries.FilmyCharacters.GetById
+namespace Application.FilmCharacters.QueryHandlers
 {
 
     public class GetFilmByIdQueryHandler : IRequestHandler<GetFilmByIdQuery, Film?>
