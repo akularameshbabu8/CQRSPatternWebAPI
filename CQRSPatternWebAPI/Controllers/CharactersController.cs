@@ -50,7 +50,7 @@ namespace API.Controllers
                 }
             }
 
-            return NotFound();
+            return NotFound("No characters available with in this film");
         }
 
 

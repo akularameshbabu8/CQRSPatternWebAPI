@@ -38,8 +38,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.RepositoryTests
 
                 // Assert
                 Assert.That(result, Is.Not.Null);
-                //Assert.AreEqual(1, result.Id);
-                //Assert.AreEqual("Entity1", result.Name);
+                
             }
         }
 }
