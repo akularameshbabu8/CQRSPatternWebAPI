@@ -115,49 +115,6 @@ namespace Infrastructure
             }
 
             return JsonConvert.DeserializeObject<T>(jsonResponse);
-        }
+        }       
 
-        /// <summary>
-        /// Gets entities.
-        /// </summary>
-        /// <param name="page">The page.</param>
-        /// <param name="size">The size of the entities.</param>
-        /// <returns>ICollection&lt; <see cref="Infrastructure.IRepository{T}" /> &gt;.</returns>
-        public ICollection<T> GetEntities(int page = DefaultPage, int size = DefaultSize)
-        {
-            string url = this.urlData + this.entity.GetPath() + "?page=" + page;
-            IEnumerable<T> results = new List<T>();
-            var helper = new Helper<T>()
-            {
-                Next = url,
-                Previous = null,
-            };
-
-            string jsonResponse = string.Empty;
-
-            while (helper.Next != null)
-            {
-                jsonResponse = this.dataService.GetDataResult(helper.Next);
-                if (jsonResponse == null)
-                {
-                    return null;
-                }
-
-                helper = JsonConvert.DeserializeObject<Helper<T>>(jsonResponse);
-                if (helper == null)
-                {
-                    return null;
-                }
-
-                results = results.Union(helper.Results);
-
-                if (results.Count() >= size)
-                {
-                    return results.Take(size).ToList();
-                }
-            }
-
-            return results.ToList();
-        }
-    }
-}
+    }}

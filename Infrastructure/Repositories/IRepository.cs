@@ -16,13 +16,6 @@ namespace Infrastructure
         /// <param name="id">The identifier.</param>
         /// <returns><see cref="CQRSPatternWebAPI.BaseEntity" />Base entity.</returns>
         T GetById(int id);
-
-        /// <summary>
-        /// Gets entities.
-        /// </summary>
-        /// <param name="page">The page.</param>
-        /// <param name="size">The size of entities.</param>
-        /// <returns>ICollection&lt; <see cref="CQRSPatternWebAPI.BaseEntity" /> &gt;.</returns>
-        ICollection<T> GetEntities(int page = 1, int size = 10);
+        
     }
 }
