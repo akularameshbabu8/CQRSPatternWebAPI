@@ -18,17 +18,6 @@ namespace Infrastructure
         /// The default API URL from where entities are downloaded.
         /// </summary>
         private const string Api = "https://swapi.dev/api/";
-
-        /// <summary>
-        /// The default page.
-        /// </summary>
-        private const int DefaultPage = 1;
-
-        /// <summary>
-        /// The default size of entities.
-        /// </summary>
-        private const int DefaultSize = 10;
-
         /// <summary>
         /// The URL end character. By default is "/" slash.
         /// </summary>
@@ -87,18 +76,7 @@ namespace Infrastructure
 
             this.urlData = url;
         }
-
-        /// <summary>
-        /// Gets the base path for consuming entities.
-        /// </summary>
-        /// <value>The path.</value>
-        public string Path
-        {
-            get
-            {
-                return this.urlData;
-            }
-        }
+        
 
         /// <summary>
         /// Gets the entity by it's identifier.
