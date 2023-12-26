@@ -12,9 +12,8 @@ namespace Domain.Models
         using Newtonsoft.Json;
 
         /// <summary>
-        /// Class Person.
-        /// </summary>
-        /// <seealso cref="CQRSPatternWebAPI.BaseEntity" />
+        /// PersonViewModel
+        /// </summary>       
         public class PersonViewModel 
         {           
 
