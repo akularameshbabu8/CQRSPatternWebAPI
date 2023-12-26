@@ -12,6 +12,8 @@ namespace Infrastructure
             //services.AddTransient<IRepository<BaseEntity>, Repository<BaseEntity>> ();
             services.AddTransient<IRepository<Film>, Repository<Film>>();
             services.AddTransient<IRepository<Person>, Repository<Person>>();
+            services.AddTransient<IDataService, DefaultDataService>();           
+            services.AddTransient<IWebHelper, WebHelper>();
             return services;
 
 
