@@ -6,7 +6,7 @@
     /// <summary>
     /// Class Person.
     /// </summary>
-    /// <seealso cref="CleanApiCore.BaseEntity" />
+    /// <seealso cref="CQRSPatternWebAPI.BaseEntity" />
     public class Person : BaseEntity
     {
         /// <summary>

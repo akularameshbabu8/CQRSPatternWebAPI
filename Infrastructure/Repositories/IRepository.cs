@@ -7,14 +7,14 @@ namespace Infrastructure
     /// <summary>
     /// Interface IRepository
     /// </summary>
-    /// <typeparam name="T"><see cref="CleanApiCore.BaseEntity" />Base entity.</typeparam>
+    /// <typeparam name="T"><see cref="CQRSPatternWebAPI.BaseEntity" />Base entity.</typeparam>
     public interface IRepository<T> where T : BaseEntity
     {
         /// <summary>
         /// Gets the entity by it's identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns><see cref="CleanApiCore.BaseEntity" />Base entity.</returns>
+        /// <returns><see cref="CQRSPatternWebAPI.BaseEntity" />Base entity.</returns>
         T GetById(int id);
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Infrastructure
         /// </summary>
         /// <param name="page">The page.</param>
         /// <param name="size">The size of entities.</param>
-        /// <returns>ICollection&lt; <see cref="CleanApiCore.BaseEntity" /> &gt;.</returns>
+        /// <returns>ICollection&lt; <see cref="CQRSPatternWebAPI.BaseEntity" /> &gt;.</returns>
         ICollection<T> GetEntities(int page = 1, int size = 10);
     }
 }

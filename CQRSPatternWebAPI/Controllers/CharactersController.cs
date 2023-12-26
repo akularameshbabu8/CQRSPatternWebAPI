@@ -1,5 +1,6 @@
 ﻿using Application.Queries.FilmyCharacters.GetById;
 using Domain.Models;
+using Domain.Models.Domain.Models;
 using Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,10 @@ namespace API.Controllers
 {
 
     [ApiController]
-    public class PersonController : ControllerBase
+    public class CharactersController : ControllerBase
     {
         internal readonly IMediator _mediator;
-        public PersonController(IMediator mediator)
+        public CharactersController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -29,7 +30,23 @@ namespace API.Controllers
 
                 if (filmResult != null && filmResult.Characters.Count > 0)
                 {
-                    return Ok(characterResult);
+
+                    var response = new PersonViewModel()
+                    {
+                        Name = characterResult.Name,
+                        BirthYear=characterResult.BirthYear,
+                        EyeColor=characterResult.EyeColor,
+                        Gender=characterResult.Gender,
+                        HairColor=characterResult.HairColor,
+                        Height=characterResult.Height,
+                        Mass=characterResult.Mass,
+                        SkinColor=characterResult.SkinColor,
+                        filmsCount= characterResult.Films.Count,
+                        vehiclesCount= characterResult.Vehicles.Count,                       
+                        starshipsCount = characterResult.Starships.Count
+                    };
+
+                    return Ok(response);
                 }
             }
 

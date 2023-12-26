@@ -7,7 +7,7 @@ namespace Infrastructure
     /// <summary>
     /// This is the default service for consuming data from web.
     /// </summary>
-    /// <seealso cref="CleanApiCore.IDataService" />
+    /// <seealso cref="CQRSPatternWebAPI.IDataService" />
     public class DefaultDataService : IDataService
     {
         /// <summary>

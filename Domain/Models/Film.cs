@@ -7,7 +7,7 @@
     /// <summary>
     /// Class Film.
     /// </summary>
-    /// <seealso cref="CleanApiCore.BaseEntity" />
+    /// <seealso cref="CQRSPatternWebAPI.BaseEntity" />
     public class Film : BaseEntity
     {
         /// <summary>
