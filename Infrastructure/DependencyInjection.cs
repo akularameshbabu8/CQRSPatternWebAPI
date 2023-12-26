@@ -9,8 +9,9 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             
-            services.AddScoped<IRepository<BaseEntity>, Repository<BaseEntity>> ();
-            
+            //services.AddTransient<IRepository<BaseEntity>, Repository<BaseEntity>> ();
+            services.AddTransient<IRepository<Film>, Repository<Film>>();
+            services.AddTransient<IRepository<Person>, Repository<Person>>();
             return services;
 
 
