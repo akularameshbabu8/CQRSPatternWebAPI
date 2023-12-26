@@ -26,7 +26,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
         {
 
             _repository = new Mock<IRepository<Person>>();
-            _handler = new GetCharacterByIdQueryHandler();
+            _handler = new GetCharacterByIdQueryHandler(_repository.Object);
 
         }
         [Test]

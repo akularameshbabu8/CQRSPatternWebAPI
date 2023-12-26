@@ -9,9 +9,9 @@ namespace Application.Queries.FilmyCharacters.GetById
     {
         private readonly IRepository<Film> _repository;
 
-        public GetFilmByIdQueryHandler()
+        public GetFilmByIdQueryHandler(IRepository<Film> repository)
         {
-            _repository = new Repository<Film>();
+            _repository = repository;
         }
 
         public async Task<Film?> Handle(GetFilmByIdQuery request, CancellationToken cancellationToken)
