@@ -1,6 +1,5 @@
 ﻿using Domain.Models;
-using System.Text.Json;
-
+using Newtonsoft.Json;
 namespace Infrastructure.FilmCharactersHttpClient
 {
     public class FilmCharactersClient : IFilmCharactersClient
@@ -21,8 +20,7 @@ namespace Infrastructure.FilmCharactersHttpClient
 
             var resultContent = await result.Content.ReadAsStringAsync();
 
-            var resultObject = JsonSerializer.Deserialize<Person>(resultContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
+            var resultObject = JsonConvert.DeserializeObject<Person>(resultContent);
             return resultObject;
 
         }
@@ -34,8 +32,7 @@ namespace Infrastructure.FilmCharactersHttpClient
 
             var resultContent = await result.Content.ReadAsStringAsync();
 
-            var resultObject = JsonSerializer.Deserialize<Film>(resultContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
+            var resultObject = JsonConvert.DeserializeObject<Film>(resultContent);
             return resultObject;
 
         }
