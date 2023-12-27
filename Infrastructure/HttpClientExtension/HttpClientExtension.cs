@@ -4,7 +4,7 @@ using Polly;
 using System.Net;
 
 
-namespace Infrastructure.Extension
+namespace Infrastructure.HttpClientExtension
 {
     public static class HttpClientCollectionExtension
     {

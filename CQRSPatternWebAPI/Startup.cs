@@ -1,7 +1,7 @@
 using Application.Abstractions;
 using Application.FilmCharacters.QueryHandlers;
-using Infrastructure.Extension;
-using Infrastructure.External;
+using Infrastructure.FilmCharactersHttpClient;
+using Infrastructure.HttpClientExtension;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -39,7 +39,7 @@ namespace CQRSPatternWebAPI
             services.ConfigureHttpClientService(Configuration);
 
             services.AddTransient<IRepository, Repository>();
-            services.AddTransient<IHttpClientFactories, HttpClientFactories>();
+            services.AddTransient<IFilmCharactersClient, FilmCharactersClient>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "People", Version = "v1" });

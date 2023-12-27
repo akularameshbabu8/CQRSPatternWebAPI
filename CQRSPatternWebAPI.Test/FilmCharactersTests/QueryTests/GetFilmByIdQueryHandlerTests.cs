@@ -60,7 +60,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
             // Act
             var result = await _handler.Handle(query, CancellationToken.None);
 
-            // Assert
+            
             // Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Characters.Count, Is.EqualTo(expectedFilm.Characters.Count));

@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
-using Infrastructure.Extension;
-using Infrastructure.External;
+using Infrastructure.FilmCharactersHttpClient;
+using Infrastructure.HttpClientExtension;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -66,7 +66,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
                     StatusCode = System.Net.HttpStatusCode.OK
                 });
 
-            var httpClientFactories = new HttpClientFactories(httpClientFactoryMock.Object);
+            var httpClientFactories = new FilmCharactersClient(httpClientFactoryMock.Object);
 
             // Act
             var result = await httpClientFactories.GetCharacterById(1);
@@ -128,7 +128,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
                     StatusCode = System.Net.HttpStatusCode.OK
                 });
 
-            var httpClientFactories = new HttpClientFactories(httpClientFactoryMock.Object);
+            var httpClientFactories = new FilmCharactersClient(httpClientFactoryMock.Object);
 
             // Act
             var result = await httpClientFactories.GetFilmById(1);

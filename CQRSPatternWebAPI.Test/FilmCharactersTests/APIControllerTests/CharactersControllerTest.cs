@@ -81,7 +81,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.APIControllerTests
 
             var viewModel = result.Value as PersonViewModel;
             Assert.That(viewModel, Is.Not.Null);
-            // Add more assertions for the properties of the view model
+           
         }
     }
 }

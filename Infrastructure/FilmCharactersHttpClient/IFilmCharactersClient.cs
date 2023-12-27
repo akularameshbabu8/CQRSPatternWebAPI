@@ -1,9 +1,9 @@
 ﻿using Domain.Models;
 using System.Threading.Tasks;
 
-namespace Infrastructure.External
+namespace Infrastructure.FilmCharactersHttpClient
 {
-    public interface IHttpClientFactories
+    public interface IFilmCharactersClient
     {
         Task<Person> GetCharacterById(int id);
         Task<Film> GetFilmById(int id);

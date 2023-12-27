@@ -1,13 +1,13 @@
 ﻿using Domain.Models;
 using System.Text.Json;
 
-namespace Infrastructure.External
+namespace Infrastructure.FilmCharactersHttpClient
 {
-    public class HttpClientFactories : IHttpClientFactories
+    public class FilmCharactersClient : IFilmCharactersClient
     {
         public readonly IHttpClientFactory _factory;
         
-        public HttpClientFactories(IHttpClientFactory factory)
+        public FilmCharactersClient(IHttpClientFactory factory)
         {
             _factory = factory;
         }
