@@ -1,17 +1,8 @@
-﻿using API.Controllers;
+﻿using Application.Abstractions;
 using Application.FilmCharacters.Queries;
 using Application.FilmCharacters.QueryHandlers;
 using Domain.Models;
-using Infrastructure;
-using MediatR;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
 namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
 {
     [TestFixture]
@@ -20,13 +11,13 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
 
 
         private GetCharacterByIdQueryHandler _handler;
-        private Mock<IRepository<Person>> _repository;
+        private Mock<IRepository> _repository;
 
         [SetUp]
         public void SetUp()
         {
 
-            _repository = new Mock<IRepository<Person>>();
+            _repository = new Mock<IRepository>();
             _handler = new GetCharacterByIdQueryHandler(_repository.Object);
 
         }
@@ -62,8 +53,8 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
                     { "https://swapi.dev/api/vehicles/30/" }
                 }
             };
-            _repository.Setup(repo => repo.GetById(It.IsAny<int>()))
-                          .Returns(expectedCharacter);
+            _repository.Setup(repo => repo.GetCharacterById(It.IsAny<int>()))
+                          .ReturnsAsync(expectedCharacter);
 
             var query = new GetCharacterByIdQuery(1);
 

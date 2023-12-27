@@ -1,7 +1,7 @@
-﻿using Application.FilmCharacters.Queries;
+﻿using Application.Abstractions;
+using Application.FilmCharacters.Queries;
 using Application.FilmCharacters.QueryHandlers;
 using Domain.Models;
-using Infrastructure;
 using Moq;
 
 namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
@@ -12,13 +12,13 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
 
 
         private GetFilmByIdQueryHandler _handler;
-        private Mock<IRepository<Film>> _repository;
+        private Mock<IRepository> _repository;
 
         [SetUp]
         public void SetUp()
         {
 
-            _repository = new Mock<IRepository<Film>>();
+            _repository = new Mock<IRepository>();
             _handler = new GetFilmByIdQueryHandler(_repository.Object);
 
         }
@@ -47,13 +47,13 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
                     { "https://swapi.dev/api/people/15/" },
                     { "https://swapi.dev/api/people/16/" },
                     { "https://swapi.dev/api/people/18/" },
-                    {"https://swapi.dev/api/people/19/" },
+                    { "https://swapi.dev/api/people/19/" },
                     { "https://swapi.dev/api/people/81/" }
                 }
 
             };
-            _repository.Setup(repo => repo.GetById(It.IsAny<int>()))
-                          .Returns(expectedFilm);
+            _repository.Setup(repo => repo.GetFilmById(It.IsAny<int>()))
+                          .ReturnsAsync(expectedFilm);
 
             var query = new GetFilmByIdQuery(1);
 

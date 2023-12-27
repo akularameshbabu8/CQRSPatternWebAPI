@@ -1,6 +1,6 @@
-﻿using Application.FilmCharacters.Queries;
+﻿using Application.Abstractions;
+using Application.FilmCharacters.Queries;
 using Domain.Models;
-using Infrastructure;
 using MediatR;
 
 namespace Application.FilmCharacters.QueryHandlers
@@ -8,9 +8,9 @@ namespace Application.FilmCharacters.QueryHandlers
 
     public class GetFilmByIdQueryHandler : IRequestHandler<GetFilmByIdQuery, Film?>
     {
-        private readonly IRepository<Film> _repository;
+        private readonly IRepository _repository;
 
-        public GetFilmByIdQueryHandler(IRepository<Film> repository)
+        public GetFilmByIdQueryHandler(IRepository repository)
         {
             _repository = repository;
         }
@@ -22,7 +22,7 @@ namespace Application.FilmCharacters.QueryHandlers
                 return null;
             }
 
-            return _repository.GetById(request.FilmId);
+            return await _repository.GetFilmById(request.FilmId);
         }
     }
 }

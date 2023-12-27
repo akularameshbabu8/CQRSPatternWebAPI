@@ -1,15 +1,15 @@
 ﻿using Application.FilmCharacters.Queries;
 using Domain.Models;
-using Infrastructure;
+using Application.Abstractions;
 using MediatR;
 
 namespace Application.FilmCharacters.QueryHandlers
 {
     public class GetCharacterByIdQueryHandler : IRequestHandler<GetCharacterByIdQuery, Person?>
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IRepository _repository;
 
-        public GetCharacterByIdQueryHandler(IRepository<Person> repository)
+        public GetCharacterByIdQueryHandler(IRepository repository)
         {
             _repository = repository;
         }
@@ -21,7 +21,7 @@ namespace Application.FilmCharacters.QueryHandlers
                 return null;
             }
 
-            return _repository.GetById(request.CharacterId);
+            return await _repository.GetCharacterById(request.CharacterId);
         }
     }
 }

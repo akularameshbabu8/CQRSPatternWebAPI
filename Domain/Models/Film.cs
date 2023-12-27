@@ -4,104 +4,33 @@
     using System.Collections.Generic;
     using Newtonsoft.Json;
 
-    /// <summary>
-    /// Class Film.
-    /// </summary>
-    /// <seealso cref="CQRSPatternWebAPI.BaseEntity" />
+  
     public class Film : BaseEntity
     {
-        /// <summary>
-        /// The path that will be added to base API URL.
-        /// </summary>
-        private const string PathToEntity = "films/";
-
-        /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>The title.</value>
         [JsonProperty]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or sets the episode identifier.
-        /// </summary>
-        /// <value>The episode identifier.</value>
+        public string Title { get; set; }        
         [JsonProperty(PropertyName = "episode_id")]
         public string EpisodeId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the opening crawl.
-        /// </summary>
-        /// <value>The opening crawl.</value>
+        
         [JsonProperty(PropertyName = "opening_crawl")]
-        public string OpeningCrawl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the director.
-        /// </summary>
-        /// <value>The director.</value>
+        public string OpeningCrawl { get; set; }        
         [JsonProperty]
-        public string Director { get; set; }
-
-        /// <summary>
-        /// Gets or sets the producer.
-        /// </summary>
-        /// <value>The producer.</value>
+        public string Director { get; set; }        
         [JsonProperty]
         public string Producer { get; set; }
-
-        /// <summary>
-        /// Gets or sets the release date.
-        /// </summary>
-        /// <value>The release date.</value>
+       
         [JsonProperty(PropertyName = "release_date")]
-        public string ReleaseDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the species.
-        /// </summary>
-        /// <value>The species.</value>
+        public string ReleaseDate { get; set; }        
         [JsonProperty]
-        public ICollection<string> Species { get; set; }
-
-        /// <summary>
-        /// Gets or sets the starships URLs.
-        /// </summary>
-        /// <value>The starships.</value>
+        public ICollection<string> Species { get; set; }        
         [JsonProperty]
-        public ICollection<string> Starships { get; set; }
-
-        /// <summary>
-        /// Gets or sets the vehicles URLs.
-        /// </summary>
-        /// <value>The vehicles.</value>
+        public ICollection<string> Starships { get; set; }        
         [JsonProperty]
-        public ICollection<string> Vehicles { get; set; }
-
-        /// <summary>
-        /// Gets or sets the characters URLs.
-        /// </summary>
-        /// <value>The characters.</value>
+        public ICollection<string> Vehicles { get; set; }        
         [JsonProperty]
-        public ICollection<string> Characters { get; set; }
-
-        /// <summary>
-        /// Gets or sets the planets URLs.
-        /// </summary>
-        /// <value>The planets.</value>
+        public ICollection<string> Characters { get; set; }        
         [JsonProperty]
         public ICollection<string> Planets { get; set; }
-
-        /// <summary>
-        /// Gets the path for extending base URL API.
-        /// </summary>
-        /// <value>The path.</value>
-        protected override string EntryPath
-        {
-            get
-            {
-                return PathToEntity;
-            }
-        }
+              
     }
 }

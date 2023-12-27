@@ -28,8 +28,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.APIControllerTests
         [Test]
         public async Task GetCharacterInFilm_ReturnsOk_WhenCharacterAndFilmExist()
         {
-            // Arrange
-            var mediatorMock = new Mock<IMediator>();
+            // Arrange            
             var characterResult = new Person
             {
                 Name = "Luke Skywalker",
@@ -56,7 +55,8 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.APIControllerTests
                 Vehicles = new List<string> {
                     {"https://swapi.dev/api/vehicles/14/" },
                     { "https://swapi.dev/api/vehicles/30/" }
-                }
+                },
+                 Url= "https://swapi.dev/api/people/1/"
             };
             _mediator.Setup(m => m.Send(It.IsAny<GetCharacterByIdQuery>(), default)).ReturnsAsync(characterResult);
 

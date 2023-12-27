@@ -20,27 +20,25 @@ namespace API.Controllers
         {
             var characterQuery = new GetCharacterByIdQuery(characterId);
             var characterResult = await _mediator.Send(characterQuery);
-
+           
             if (characterResult != null)
             {
                 var filmQuery = new GetFilmByIdQuery(filmId);
                 var filmResult = await _mediator.Send(filmQuery);
-
-                if (filmResult != null && filmResult.Characters.Count > 0)
+                if (filmResult.Characters.Contains(characterResult.Url))
                 {
-
                     var response = new PersonViewModel()
                     {
                         Name = characterResult.Name,
-                        BirthYear=characterResult.BirthYear,
-                        EyeColor=characterResult.EyeColor,
-                        Gender=characterResult.Gender,
-                        HairColor=characterResult.HairColor,
-                        Height=characterResult.Height,
-                        Mass=characterResult.Mass,
-                        SkinColor=characterResult.SkinColor,
-                        filmsCount= characterResult.Films.Count,
-                        vehiclesCount= characterResult.Vehicles.Count,                       
+                        BirthYear = characterResult.BirthYear,
+                        EyeColor = characterResult.EyeColor,
+                        Gender = characterResult.Gender,
+                        HairColor = characterResult.HairColor,
+                        Height = characterResult.Height,
+                        Mass = characterResult.Mass,
+                        SkinColor = characterResult.SkinColor,
+                        filmsCount = characterResult.Films.Count,
+                        vehiclesCount = characterResult.Vehicles.Count,
                         starshipsCount = characterResult.Starships.Count
                     };
 
