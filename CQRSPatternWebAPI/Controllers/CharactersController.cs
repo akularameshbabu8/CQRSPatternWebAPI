@@ -18,38 +18,50 @@ namespace API.Controllers
         [Route("/swapi/films/{filmId}/characters/{characterId}")]
         public async Task<IActionResult> GetCharacterInFilm(int filmId, int characterId)
         {
-            var characterQuery = new GetCharacterByIdQuery(characterId);
-            var characterResult = await _mediator.Send(characterQuery);
-           
-            if (characterResult != null)
+            try
             {
-                var filmQuery = new GetFilmByIdQuery(filmId);
-                var filmResult = await _mediator.Send(filmQuery);
-                if (filmResult.Characters.Contains(characterResult.Url))
-                {
-                    var response = new PersonViewModel()
-                    {
-                        Name = characterResult.Name,
-                        BirthYear = characterResult.BirthYear,
-                        EyeColor = characterResult.EyeColor,
-                        Gender = characterResult.Gender,
-                        HairColor = characterResult.HairColor,
-                        Height = characterResult.Height,
-                        Mass = characterResult.Mass,
-                        SkinColor = characterResult.SkinColor,
-                        filmsCount = characterResult.Films.Count,
-                        vehiclesCount = characterResult.Vehicles.Count,
-                        starshipsCount = characterResult.Starships.Count
-                    };
+                var characterQuery = new GetCharacterByIdQuery(characterId);
+                var characterResult = await _mediator.Send(characterQuery);
 
-                    return Ok(response);
+                if (characterResult.Url != null)
+                {
+                    var filmQuery = new GetFilmByIdQuery(filmId);
+                    var filmResult = await _mediator.Send(filmQuery);
+
+                    if (filmResult.Characters != null && filmResult.Characters.Contains(characterResult.Url))
+                    {
+                        var response = new PersonViewModel()
+                        {
+                            Name = characterResult.Name,
+                            BirthYear = characterResult.BirthYear,
+                            EyeColor = characterResult.EyeColor,
+                            Gender = characterResult.Gender,
+                            HairColor = characterResult.HairColor,
+                            Height = characterResult.Height,
+                            Mass = characterResult.Mass,
+                            SkinColor = characterResult.SkinColor,
+                            filmsCount = characterResult.Films.Count,
+                            vehiclesCount = characterResult.Vehicles.Count,
+                            starshipsCount = characterResult.Starships.Count
+                        };
+
+                        return Ok(response);
+                    }
+                    else
+                    {
+
+                        throw new InvalidOperationException($"Character with people Id {characterId} not available in film {filmId}");
+                    }
                 }
+
+                throw new InvalidOperationException($"Character with people Id {characterId} not found");
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                return StatusCode(500, ex.Message);
             }
 
-            return NotFound("No characters available with in this film");
         }
-
-
-
     }
 }

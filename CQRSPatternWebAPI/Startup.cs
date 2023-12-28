@@ -59,7 +59,7 @@ namespace CQRSPatternWebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Taxa de Juros");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FilmCharacters");
                     c.RoutePrefix = "swagger";
                 });
             }
