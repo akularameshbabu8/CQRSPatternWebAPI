@@ -20,6 +20,7 @@ namespace API.Controllers
         }
         [HttpGet]
         [Route("/swapi/films/{filmId}/characters/{characterId}")]
+        [ResponseCache(Duration = 36000, Location = ResponseCacheLocation.Any, NoStore = false)]
         public async Task<IActionResult> GetCharacterInFilm(int filmId, int characterId)
         {
             _logger.LogInformation("Requested Film/Charcter API's");

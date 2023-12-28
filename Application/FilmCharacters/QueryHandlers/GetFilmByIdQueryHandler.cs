@@ -1,6 +1,6 @@
-﻿using Application.Abstractions;
-using Application.FilmCharacters.Queries;
+﻿using Application.FilmCharacters.Queries;
 using Domain.Models;
+using Infrastructure.FilmCharactersHttpClientFactory;
 using MediatR;
 
 namespace Application.FilmCharacters.QueryHandlers
@@ -8,11 +8,11 @@ namespace Application.FilmCharacters.QueryHandlers
 
     public class GetFilmByIdQueryHandler : IRequestHandler<GetFilmByIdQuery, Film?>
     {
-        private readonly IRepository _repository;
+        private readonly IFilmCharactersHttpClientFactory _iHttpClientFactory;
 
-        public GetFilmByIdQueryHandler(IRepository repository)
+        public GetFilmByIdQueryHandler(IFilmCharactersHttpClientFactory iHttpClientFactory)
         {
-            _repository = repository;
+            _iHttpClientFactory = iHttpClientFactory;
         }
 
         public async Task<Film?> Handle(GetFilmByIdQuery request, CancellationToken cancellationToken)
@@ -22,7 +22,7 @@ namespace Application.FilmCharacters.QueryHandlers
                 return null;
             }
 
-            return await _repository.GetFilmById(request.FilmId);
+            return await _iHttpClientFactory.GetFilmById(request.FilmId);
         }
     }
 }

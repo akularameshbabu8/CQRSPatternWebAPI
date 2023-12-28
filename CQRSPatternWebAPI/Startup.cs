@@ -1,4 +1,3 @@
-using Application.Abstractions;
 using Application.FilmCharacters.QueryHandlers;
 using CQRSPatternWebAPI.Middleware;
 using Infrastructure.FilmCharactersHttpClientFactory;
@@ -32,14 +31,19 @@ namespace CQRSPatternWebAPI
                                         .AllowAnyMethod()
                                         .AllowAnyHeader());
             });
-
+            services.AddResponseCaching(options =>
+            {
+                options.MaximumBodySize = 250;
+                options.SizeLimit = 250;
+                options.UseCaseSensitivePaths = false;
+            });
             services.AddResponseCompression();
             services.AddResponseCaching();
 
             
             services.ConfigureHttpClientService(Configuration);
 
-            services.AddTransient<IRepository, Repository>();
+           
             services.AddTransient<IFilmCharactersHttpClientFactory, FilmCharactersHttpClientFactory>();
             services.AddSwaggerGen(c =>
             {
