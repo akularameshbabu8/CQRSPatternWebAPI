@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions;
 using Domain.Models;
-using Infrastructure.FilmCharactersHttpClient;
+using Infrastructure.FilmCharactersHttpClientFactory;
 using Moq;
 namespace CQRSPatternWebAPI.Test.FilmCharactersTests.RepositoryTests
 {
@@ -11,7 +11,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.RepositoryTests
         public async Task GetCharacterById_ShouldReturnPerson()
         {
             // Arrange
-            var httpClientFactoryMock = new Mock<IFilmCharactersClient>();
+            var httpClientFactoryMock = new Mock<IFilmCharactersHttpClientFactory>();
             var expectedPerson = new Person { Name = "John Doe" };
             httpClientFactoryMock.Setup(factory => factory.GetCharacterById(It.IsAny<int>())).ReturnsAsync(expectedPerson);
 
@@ -30,7 +30,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.RepositoryTests
         public async Task GetFilmById_ShouldReturnFilm()
         {
             // Arrange
-            var httpClientFactoryMock = new Mock<IFilmCharactersClient>();
+            var httpClientFactoryMock = new Mock<IFilmCharactersHttpClientFactory>();
             var expectedFilm = new Film { Title = "Star Wars" };
             httpClientFactoryMock.Setup(factory => factory.GetFilmById(It.IsAny<int>())).ReturnsAsync(expectedFilm);
 

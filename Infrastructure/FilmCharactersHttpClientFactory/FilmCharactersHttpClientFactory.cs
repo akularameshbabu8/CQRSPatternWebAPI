@@ -1,12 +1,12 @@
 ﻿using Domain.Models;
 using Newtonsoft.Json;
-namespace Infrastructure.FilmCharactersHttpClient
+namespace Infrastructure.FilmCharactersHttpClientFactory
 {
-    public class FilmCharactersClient : IFilmCharactersClient
+    public class FilmCharactersHttpClientFactory : IFilmCharactersHttpClientFactory
     {
         public readonly IHttpClientFactory _factory;
         
-        public FilmCharactersClient(IHttpClientFactory factory)
+        public FilmCharactersHttpClientFactory(IHttpClientFactory factory)
         {
             _factory = factory;
         }

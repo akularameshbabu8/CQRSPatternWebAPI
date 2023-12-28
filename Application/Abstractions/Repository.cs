@@ -1,14 +1,14 @@
 ﻿using Domain.Models;
-using Infrastructure.FilmCharactersHttpClient;
+using Infrastructure.FilmCharactersHttpClientFactory;
 
 namespace Application.Abstractions
 {
     public  class Repository : IRepository
     {
         
-        private readonly IFilmCharactersClient _iHttpClientFactory;
+        private readonly IFilmCharactersHttpClientFactory _iHttpClientFactory;
 
-        public Repository(IFilmCharactersClient iHttpClientFactory)
+        public Repository(IFilmCharactersHttpClientFactory iHttpClientFactory)
         {
             
             _iHttpClientFactory = iHttpClientFactory;
