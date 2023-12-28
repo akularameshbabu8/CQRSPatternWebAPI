@@ -1,5 +1,6 @@
 using Application.Abstractions;
 using Application.FilmCharacters.QueryHandlers;
+using CQRSPatternWebAPI.Middleware;
 using Infrastructure.FilmCharactersHttpClientFactory;
 using Infrastructure.HttpClientExtension;
 using MediatR;
@@ -42,7 +43,7 @@ namespace CQRSPatternWebAPI
             services.AddTransient<IFilmCharactersHttpClientFactory, FilmCharactersHttpClientFactory>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "People", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FilmCharacters", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
@@ -69,7 +70,7 @@ namespace CQRSPatternWebAPI
             }
 
             app.UseCors("CorsPolicy");
-
+            app.ConfigureCustomExceptionMiddleware();
             app.UseRouting();
             app.UseResponseCompression();
             app.UseResponseCaching();

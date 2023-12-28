@@ -54,7 +54,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        _logger.LogInformation("Thrown Exception");
+                        _logger.LogInformation("Error While trying to get film characters");
                         throw new InvalidOperationException($"Character with people Id {characterId} not available in film {filmId}");
                     }
                 }
@@ -63,8 +63,8 @@ namespace API.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                _logger.LogError(ex, "Exception Caught");
-                return StatusCode(500, ex.Message);
+                _logger.LogError(ex, "Error While trying to get film characters");
+                throw ex;
             }
 
         }
