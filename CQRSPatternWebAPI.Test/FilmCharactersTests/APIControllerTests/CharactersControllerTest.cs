@@ -4,6 +4,7 @@ using Domain.Models;
 using Domain.Models.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace CQRSPatternWebAPI.Test.FilmCharactersTests.APIControllerTests
@@ -14,15 +15,16 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.APIControllerTests
     public class CharactersControllerTest
     {
         private Mock<IMediator> _mediator;
+        private Mock<ILogger<CharactersController>> _logger;
 
         private CharactersController _controller;
 
         [SetUp]
         public void SetUp()
         {
-
+            _logger = new  Mock<ILogger<CharactersController>>();
             _mediator = new Mock<IMediator>();
-            _controller = new CharactersController(_mediator.Object);
+            _controller = new CharactersController(_mediator.Object, _logger.Object);
 
         }
         [Test]

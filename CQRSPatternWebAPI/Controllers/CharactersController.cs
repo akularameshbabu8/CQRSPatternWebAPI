@@ -2,22 +2,27 @@
 using Domain.Models.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Fluent;
 namespace API.Controllers
 {
 
     [ApiController]
     public class CharactersController : ControllerBase
     {
+        private static ILogger<CharactersController> _logger;
         internal readonly IMediator _mediator;
-        public CharactersController(IMediator mediator)
+        public CharactersController(IMediator mediator, ILogger<CharactersController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
         [HttpGet]
         [Route("/swapi/films/{filmId}/characters/{characterId}")]
         public async Task<IActionResult> GetCharacterInFilm(int filmId, int characterId)
         {
+            _logger.LogInformation("Requested Film/Charcter API's");
             try
             {
                 var characterQuery = new GetCharacterByIdQuery(characterId);
@@ -49,7 +54,7 @@ namespace API.Controllers
                     }
                     else
                     {
-
+                        _logger.LogInformation("Thrown Exception");
                         throw new InvalidOperationException($"Character with people Id {characterId} not available in film {filmId}");
                     }
                 }
@@ -58,7 +63,7 @@ namespace API.Controllers
             }
             catch (InvalidOperationException ex)
             {
-
+                _logger.LogError(ex, "Exception Caught");
                 return StatusCode(500, ex.Message);
             }
 
