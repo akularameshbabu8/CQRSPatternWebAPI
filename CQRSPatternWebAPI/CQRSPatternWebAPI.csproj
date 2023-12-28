@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <None Update="C:\Users\RameshbabuAkula\.nuget\packages\nlog.config\4.7.15\contentFiles\any\any\NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
