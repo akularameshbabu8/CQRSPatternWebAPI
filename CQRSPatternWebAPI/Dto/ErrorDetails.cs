@@ -4,8 +4,8 @@ namespace CQRSPatternWebAPI.Dto
 {
     public class ErrorDetails
     {
-        public int statusCode { get; set; }
-        public string message { get; set; }
+        public int StatusCode { get; set; }
+        public string Message { get; set; }
 
         public override string ToString()
         {

@@ -1,23 +1,23 @@
-﻿using Application.FilmCharacters.Queries;
-using Application.FilmCharacters.QueryHandlers;
+﻿using Application.Queries;
+using Application.QueryHandlers;
+using Application.Services;
 using Domain.Models;
-using Infrastructure.FilmCharactersHttpClientFactory;
 using Moq;
 
-namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
+namespace CQRSPatternWebAPI.Test.QueryTests
 {
     [TestFixture]
     public class GetFilmByIdQueryHandlerTests
     {
         private GetFilmByIdQueryHandler _handler;
-        private Mock<IFilmCharactersHttpClientFactory> _iHttpClientFactory;
+        private Mock<IHttpClientService> _iHttpClientService;
 
         [SetUp]
         public void SetUp()
         {
 
-            _iHttpClientFactory = new Mock<IFilmCharactersHttpClientFactory>();
-            _handler = new GetFilmByIdQueryHandler(_iHttpClientFactory.Object);
+            _iHttpClientService = new Mock<IHttpClientService>();
+            _handler = new GetFilmByIdQueryHandler(_iHttpClientService.Object);
 
         }
         [Test]
@@ -50,7 +50,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
                 }
 
             };
-            _iHttpClientFactory.Setup(repo => repo.GetFilmById(It.IsAny<int>()))
+            _iHttpClientService.Setup(repo => repo.GetFilmById(It.IsAny<int>()))
                           .ReturnsAsync(expectedFilm);
 
             var query = new GetFilmByIdQuery(1);
@@ -58,7 +58,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
             // Act
             var result = await _handler.Handle(query, CancellationToken.None);
 
-            
+
             // Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Characters.Count, Is.EqualTo(expectedFilm.Characters.Count));

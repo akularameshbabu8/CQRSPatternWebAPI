@@ -1,7 +1,7 @@
 ﻿using Domain.Models;
 using MediatR;
 
-namespace Application.FilmCharacters.Queries
+namespace Application.Queries
 {
     public class GetFilmByIdQuery : IRequest<Film>
     {

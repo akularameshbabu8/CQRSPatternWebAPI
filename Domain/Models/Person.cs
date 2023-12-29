@@ -1,40 +1,36 @@
-﻿namespace Domain.Models
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+namespace Domain.Models
 {
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
-    
-
     public class Person : BaseEntity
     {
-        [JsonProperty]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
        
-        [JsonProperty(PropertyName = "birth_year")]
+        [JsonPropertyName( "birth_year")]
         public string BirthYear { get; set; }
         
-        [JsonProperty(PropertyName = "eye_color")]
+        [JsonPropertyName("eye_color")]
         public string EyeColor { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("gender")]
         public string Gender { get; set; }
-       
-        [JsonProperty(PropertyName = "hair_color")]
+        [JsonPropertyName("hair_color")]        
         public string HairColor { get; set; }       
-        [JsonProperty]
-        public string Height { get; set; }        
-        [JsonProperty]
-        public string Mass { get; set; }        
-        [JsonProperty(PropertyName = "skin_color")]
+        [JsonPropertyName("height")]
+        public string Height { get; set; }
+        [JsonPropertyName("mass")]
+        public string Mass { get; set; }       
+        [JsonPropertyName("skin_color")]
         public string SkinColor { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("homeworld")]
         public string Homeworld { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("films")]
         public ICollection<string> Films { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("species")]
         public ICollection<string> Species { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("starships")]
         public ICollection<string> Starships { get; set; }        
-        [JsonProperty]
-        public ICollection<string> Vehicles { get; set; }       
-        
+        [JsonPropertyName("vehicles")]
+        public ICollection<string> Vehicles { get; set; }  
     }
 }

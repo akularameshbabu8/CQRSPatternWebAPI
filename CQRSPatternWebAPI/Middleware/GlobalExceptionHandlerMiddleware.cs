@@ -21,11 +21,7 @@ namespace CQRSPatternWebAPI.Middleware
             try
             {
                 await _next(context);
-            }
-            catch (InvalidOperationException exInvalidOp)
-            {
-                await HandleExceptionAsync(context, exInvalidOp);
-            }
+            }           
             catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex);
@@ -38,14 +34,12 @@ namespace CQRSPatternWebAPI.Middleware
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             string message = string.Empty;
-            if (ex.GetType() == typeof(InvalidOperationException))
+            if (ex.GetType() == typeof(Exception))
             {
-                message = "Invalid operation exception.";
-            }
-            else
                 message = "Internal Server error.";
+            }            
 
-            byte[] error = Encoding.ASCII.GetBytes(new ErrorDetails() { statusCode = context.Response.StatusCode, message = message }.ToString());
+            byte[] error = Encoding.ASCII.GetBytes(new ErrorDetails() { StatusCode = context.Response.StatusCode, Message = message }.ToString());
             await context.Response.Body.WriteAsync(error, 0, error.Length);
         }
     }

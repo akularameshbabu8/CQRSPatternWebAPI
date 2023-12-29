@@ -1,9 +1,10 @@
-﻿using Application.FilmCharacters.Queries;
-using Application.FilmCharacters.QueryHandlers;
+﻿using Application.Queries;
+using Application.QueryHandlers;
 using Domain.Models;
-using Infrastructure.FilmCharactersHttpClientFactory;
 using Moq;
-namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
+using Application.Services;
+
+namespace CQRSPatternWebAPI.Test.QueryTests
 {
     [TestFixture]
     public class GetCharacterByIdQueryHandlerTests
@@ -11,14 +12,14 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
 
 
         private GetCharacterByIdQueryHandler _handler;
-        private Mock<IFilmCharactersHttpClientFactory> _iHttpClientFactory;
+        private Mock<IHttpClientService> _iHttpClientService;
 
         [SetUp]
         public void SetUp()
         {
 
-            _iHttpClientFactory = new Mock<IFilmCharactersHttpClientFactory>();
-            _handler = new GetCharacterByIdQueryHandler(_iHttpClientFactory.Object);
+            _iHttpClientService = new Mock<IHttpClientService>();
+            _handler = new GetCharacterByIdQueryHandler(_iHttpClientService.Object);
 
         }
         [Test]
@@ -53,7 +54,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
                     { "https://swapi.dev/api/vehicles/30/" }
                 }
             };
-            _iHttpClientFactory.Setup(repo => repo.GetCharacterById(It.IsAny<int>()))
+            _iHttpClientService.Setup(repo => repo.GetCharacterById(It.IsAny<int>()))
                           .ReturnsAsync(expectedCharacter);
 
             var query = new GetCharacterByIdQuery(1);
@@ -64,7 +65,7 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.QueryTests
             // Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(expectedCharacter.Name));
-           
+
         }
 
 

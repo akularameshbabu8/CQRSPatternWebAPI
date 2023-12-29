@@ -1,10 +1,7 @@
-﻿using Application.FilmCharacters.Queries;
-using Domain.Models.Domain.Models;
+﻿using Application.Queries;
+using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Fluent;
 namespace API.Controllers
 {
 
@@ -19,22 +16,19 @@ namespace API.Controllers
             _logger = logger;
         }
         [HttpGet]
-        [Route("/swapi/films/{filmId}/characters/{characterId}")]
-        [ResponseCache(Duration = 36000, Location = ResponseCacheLocation.Any, NoStore = false)]
+        [Route("/swapi/films/{filmId}/characters/{characterId}")]        
         public async Task<IActionResult> GetCharacterInFilm(int filmId, int characterId)
         {
             _logger.LogInformation("Requested Film/Charcter API's");
             try
             {
-                var characterQuery = new GetCharacterByIdQuery(characterId);
-                var characterResult = await _mediator.Send(characterQuery);
-
-                if (characterResult.Url != null)
+                var filmQuery = new GetFilmByIdQuery(filmId);
+                var filmResult = await _mediator.Send(filmQuery);
+                if (filmResult.Characters != null)
                 {
-                    var filmQuery = new GetFilmByIdQuery(filmId);
-                    var filmResult = await _mediator.Send(filmQuery);
-
-                    if (filmResult.Characters != null && filmResult.Characters.Contains(characterResult.Url))
+                    var characterQuery = new GetCharacterByIdQuery(characterId);
+                    var characterResult = await _mediator.Send(characterQuery);
+                    if (characterResult.Url != null && filmResult.Characters.Contains(characterResult.Url))
                     {
                         var response = new PersonViewModel()
                         {
@@ -50,22 +44,25 @@ namespace API.Controllers
                             vehiclesCount = characterResult.Vehicles.Count,
                             starshipsCount = characterResult.Starships.Count
                         };
-
                         return Ok(response);
                     }
                     else
                     {
-                        _logger.LogInformation("Error While trying to get film characters");
-                        throw new InvalidOperationException($"Character with people Id {characterId} not available in film {filmId}");
+                        // Character not found in the specified film
+                        return NotFound("Character not found in the specified film.");
+
                     }
                 }
-
-                throw new InvalidOperationException($"Character with people Id {characterId} not found");
+                else
+                {
+                    // Film not found
+                    return NotFound("Film not found.");
+                }
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
-                _logger.LogError(ex, "Error While trying to get film characters");
-                throw ex;
+                _logger.LogError(ex, "An error occurred while trying to get film characters.");
+                return StatusCode(500, "Internal Server Error");
             }
 
         }

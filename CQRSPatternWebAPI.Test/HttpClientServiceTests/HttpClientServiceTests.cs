@@ -1,16 +1,15 @@
-﻿using Domain.Models;
-using Infrastructure.FilmCharactersHttpClientFactory;
-using Infrastructure.HttpClientExtension;
+﻿using Application.Services;
+using Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Moq.Protected;
 using System.Text.Json;
 
-namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
+namespace CQRSPatternWebAPI.Test.HttpClientServiceTests
 {
     [TestFixture]
-    public class HttpClientFactoriesTests
+    public class HttpClientServiceTests
     {
         [Test]
         public async Task GetCharacterById_ShouldReturnPerson()
@@ -66,10 +65,10 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
                     StatusCode = System.Net.HttpStatusCode.OK
                 });
 
-            var httpClientFactories = new FilmCharactersHttpClientFactory(httpClientFactoryMock.Object);
+            var _iHttpClientService = new HttpClientService(httpClientFactoryMock.Object);
 
             // Act
-            var result = await httpClientFactories.GetCharacterById(1);
+            var result = await _iHttpClientService.GetCharacterById(1);
 
             // Assert
             Assert.That(result, Is.Not.Null);
@@ -96,6 +95,12 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
 
             var expectedFilm = new Film
             {
+                Title = "A New Hope",
+                EpisodeId = 4,
+                OpeningCrawl = "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+                Director = "George Lucas",
+                Producer = "Gary Kurtz, Rick McCallum",
+                ReleaseDate = "1977-05-25",
                 Characters = new List<string>
                 {
                     { "https://swapi.dev/api/people/1/" },
@@ -116,8 +121,21 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
                     { "https://swapi.dev/api/people/18/" },
                     { "https://swapi.dev/api/people/19/" },
                     { "https://swapi.dev/api/people/81/" }
+                },
+                Planets = new List<string> {{"https://swapi.dev/api/planets/1/" },
+                    { "https://swapi.dev/api/planets/2/" },
+                    { "https://swapi.dev/api/planets/3/" }
+                },
+                Starships = new List<string> {
+                    { "https://swapi.dev/api/starships/2/"},
+                    { "https://swapi.dev/api/starships/3/" },
+                    { "https://swapi.dev/api/starships/5/" },
+                    { "https://swapi.dev/api/starships/9/" },
+                    { "https://swapi.dev/api/starships/10/" },
+                    { "https://swapi.dev/api/starships/11/" },
+                    { "https://swapi.dev/api/starships/12/" },
+                     { "https://swapi.dev/api/starships/13/" }
                 }
-
             };
             var serializedFilm = JsonSerializer.Serialize(expectedFilm);
             httpMessageHandlerMock.Protected()
@@ -128,10 +146,10 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
                     StatusCode = System.Net.HttpStatusCode.OK
                 });
 
-            var httpClientFactories = new FilmCharactersHttpClientFactory(httpClientFactoryMock.Object);
+            var _iHttpClientService = new HttpClientService(httpClientFactoryMock.Object); ;
 
             // Act
-            var result = await httpClientFactories.GetFilmById(1);
+            var result = await _iHttpClientService.GetFilmById(1);
 
             // Assert
             Assert.That(result, Is.Not.Null);
@@ -152,17 +170,17 @@ namespace CQRSPatternWebAPI.Test.FilmCharactersTests.HttpClientFactoriesTests
             httpClientFactoryMock.Setup(factory => factory.CreateClient("people")).Returns(httpClient);
             httpClientFactoryMock.Setup(factory => factory.CreateClient("films")).Returns(httpClient);
 
-            services.AddSingleton(httpClientFactoryMock.Object);            
+            services.AddSingleton(httpClientFactoryMock.Object);
 
             // Act
-            HttpClientCollectionExtension.ConfigureHttpClientService(services, configuration);            
+            HttpClientCollectionExtension.ConfigureHttpClientService(services, configuration);
             var peopleHttpClient = httpClientFactoryMock.Object.CreateClient("people");
             var filmsHttpClient = httpClientFactoryMock.Object.CreateClient("films");
 
             // Assert         
             Assert.That(peopleHttpClient, Is.Not.Null);
             Assert.That(filmsHttpClient, Is.Not.Null);
-          
+
         }
     }
 }

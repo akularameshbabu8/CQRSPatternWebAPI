@@ -19,7 +19,7 @@ namespace CQRSPatternWebAPI.Middleware
                 var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                 if (contextFeature != null)
                 {                   
-                    byte[] error = Encoding.ASCII.GetBytes(new ErrorDetails() { statusCode = context.Response.StatusCode, message = "Internal Service Error" }.ToString());
+                    byte[] error = Encoding.ASCII.GetBytes(new ErrorDetails() { StatusCode = context.Response.StatusCode, Message = "Internal Service Error" }.ToString());
                     await context.Response.Body.WriteAsync(error, 0, error.Length);
                 }
             })); ;

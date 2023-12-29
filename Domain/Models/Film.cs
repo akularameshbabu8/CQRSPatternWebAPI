@@ -2,35 +2,33 @@
 {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
-  
     public class Film : BaseEntity
     {
-        [JsonProperty]
+        [JsonPropertyName("Title")]
         public string Title { get; set; }        
-        [JsonProperty(PropertyName = "episode_id")]
-        public string EpisodeId { get; set; }
-        
-        [JsonProperty(PropertyName = "opening_crawl")]
-        public string OpeningCrawl { get; set; }        
-        [JsonProperty]
-        public string Director { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("episode_id")]
+        public int EpisodeId { get; set; }
+        [JsonPropertyName("opening_crawl")]
+        public string OpeningCrawl { get; set; }
+        [JsonPropertyName("director")]
+        public string Director { get; set; }
+        [JsonPropertyName("producer")]
         public string Producer { get; set; }
-       
-        [JsonProperty(PropertyName = "release_date")]
-        public string ReleaseDate { get; set; }        
-        [JsonProperty]
-        public ICollection<string> Species { get; set; }        
-        [JsonProperty]
-        public ICollection<string> Starships { get; set; }        
-        [JsonProperty]
-        public ICollection<string> Vehicles { get; set; }        
-        [JsonProperty]
-        public ICollection<string> Characters { get; set; }        
-        [JsonProperty]
+        [JsonPropertyName("release_date")]
+        public string ReleaseDate { get; set; }
+        [JsonPropertyName("species")]
+        public ICollection<string> Species { get; set; }
+        [JsonPropertyName("starships")]
+        public ICollection<string> Starships { get; set; }
+        [JsonPropertyName("vehicles")]
+        public ICollection<string> Vehicles { get; set; }
+        [JsonPropertyName("characters")]
+        public ICollection<string> Characters { get; set; }
+        [JsonPropertyName("planets")]
         public ICollection<string> Planets { get; set; }
-              
+       
+
     }
 }
