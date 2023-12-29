@@ -1,10 +1,11 @@
-﻿using CQRSPatternWebAPI.Dto;
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
-using System.Net.Mime;
 using System.Net;
+using System.Net.Mime;
 using System.Text;
 
-namespace CQRSPatternWebAPI.Middleware
+namespace Infrastructure.Middleware
 {
     public static class ExceptionMiddlewareExtention
     {

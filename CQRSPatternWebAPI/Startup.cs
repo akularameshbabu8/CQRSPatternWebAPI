@@ -1,6 +1,6 @@
 using Application.QueryHandlers;
 using Application.Services;
-using CQRSPatternWebAPI.Middleware;
+using Infrastructure.Middleware;
 using MediatR;
 using Microsoft.OpenApi.Models;
 

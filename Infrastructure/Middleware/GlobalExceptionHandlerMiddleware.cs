@@ -1,10 +1,10 @@
-﻿using System.Net.Mime;
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Http;
 using System.Net;
+using System.Net.Mime;
 using System.Text;
-using CQRSPatternWebAPI.Dto;
 
-
-namespace CQRSPatternWebAPI.Middleware
+namespace Infrastructure.Middleware
 {
     public class GlobalExceptionMiddleware
     {

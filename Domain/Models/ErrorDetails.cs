@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace CQRSPatternWebAPI.Dto
+namespace Domain.Models
 {
     public class ErrorDetails
     {
