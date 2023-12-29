@@ -19,9 +19,6 @@
     <Reference Include="Domain">
       <HintPath>..\Domain\bin\Debug\net6.0\Domain.dll</HintPath>
     </Reference>
-    <Reference Include="Infrastructure">
-      <HintPath>..\Infrastructure\bin\Debug\net6.0\Infrastructure.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
