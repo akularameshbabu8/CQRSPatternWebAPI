@@ -18,18 +18,8 @@ namespace CQRSPatternWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             BuildMediator(services);
-
-            services.AddRouting(options => options.LowercaseUrls = true);
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                                        .AllowAnyMethod()
-                                        .AllowAnyHeader());
-            });
+            
             services.ConfigureHttpClientService(Configuration);
-
 
             services.AddTransient<IHttpClientService, HttpClientService>();
             services.AddSwaggerGen(c =>
