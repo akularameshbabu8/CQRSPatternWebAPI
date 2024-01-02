@@ -45,13 +45,10 @@ namespace CQRSPatternWebAPI
                 else
                 {
                     app.UseHsts();
-                }
-
-                app.UseCors("CorsPolicy");
+                }               
                 app.ConfigureCustomExceptionMiddleware();
                 app.UseRouting();
-                app.UseResponseCompression();
-                app.UseResponseCaching();
+                app.UseResponseCompression();                
                 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             }
 
